@@ -41,4 +41,4 @@ Recipe.init({
     },
 }, {sequelize: db})
 
-module.exports = Recipe
+module.exports = { Recipe }

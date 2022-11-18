@@ -140,7 +140,7 @@ submitbtn.addEventListener("click", () => {
 
 sendbutton.addEventListener("click", async () => {
   const data = await fetch("http://localhost:5001/recipe/add", {method: "POST"})
-  const response = await data.json
+  const response = await data.json()
   console.log(response)
 })
 
