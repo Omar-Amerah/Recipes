@@ -1,9 +1,12 @@
 const ingredients = []
+const finalnutrition = {}
 const main = document.querySelector("main")
 const search = document.querySelector("#Search")
 const submitbtn = document.querySelector("button")
 const sendbutton = document.getElementById("Send")
+const sendsearch = document.getElementById("Recipesearch")
 let value = ""
+let recname = "Empty"
 async function getfood(input) {
   const options = {
     method: 'GET',
@@ -75,7 +78,8 @@ function createcards(data){
   temparray.push(data.items[0].sugar_g)
 
   ingredients.push(temparray)
-  console.log(ingredients)
+  updatenutritionalinformation()
+  
 
 
   const weight = document.createElement('input')
@@ -102,7 +106,7 @@ function createcards(data){
       const arraypos = ingredients.indexOf(temparray)
       temparray = [data.items[0].name,data.items[0].calories * updateval/100, data.items[0].carbohydrates_total_g * updateval/100,data.items[0].fat_total_g * updateval/100,data.items[0].protein_g * updateval/100,data.items[0].sodium_mg * updateval/100,data.items[0].sugar_g * updateval/100]
       ingredients.splice(arraypos, 1, temparray)
-      console.log(ingredients)
+      updatenutritionalinformation()
     }
   })
 
@@ -112,7 +116,6 @@ function createcards(data){
 
   removebtn.addEventListener("click", () => {
     ingredients.splice(ingredients.indexOf(temparray), 1)
-    console.log(ingredients)
     card.remove()
   })
 
@@ -132,107 +135,47 @@ submitbtn.addEventListener("click", () => {
   getfood(value)
 })
 
-// sendbutton.addEventListener("click", async () => {
-//   const data = await fetch("http://localhost:5001/recipe/send", {method: "GET"})
-//   const response = await data.json
-//   console.log(response)
-// })
-
 sendbutton.addEventListener("click", async () => {
-  const data = await fetch("http://localhost:5001/recipe/add", {method: "POST"})
-  const response = await data.json()
-  console.log(response)
+  if(recname !== "Empty" && recname !== "" && ingredients.length !== 0)
+  {
+    const data = await fetch("http://localhost:5001/recipe/add", {method: "POST", headers: {'Content-Type': 'application/json'},body: JSON.stringify(finalnutrition)});
+    const response = await data.json()
+    console.log(response)
+  }
+  else if (ingredients.length !== 0)
+  {
+    alert("Name cannot be empty!")    
+  }
+  else{
+    alert("Must contain Ingredients")
+  }
 })
 
-
-// async function addingredient(Name, Calories, Carbohydrates, Fat, Protein, Sodium, Sugar){
-//   await Recipe.create({
-//     name: Name,
-//     calories: Calories,
-//     carbohydrates: Carbohydrates,
-//     fat: Fat,
-//     protein: Protein,
-//     sodium: Sodium,
-//     sugar: Sugar
-//   })
-// }
-
-function totalinfo()
-{
- 
-  // for(i = 0; i < ingredients.length; i++)
-  // {
-  //   for(j = 1; )
-  // }
+function updatenutritionalinformation() {
+  for(let i = 0; i < ingredients.length; i++)
+  {
+    if(finalnutrition.calories === undefined)
+    {
+      finalnutrition.name = "No Name"
+      finalnutrition.calories = ingredients[i][1] 
+      finalnutrition.carbohydrates = ingredients[i][2]
+      finalnutrition.Fat = ingredients[i][3]
+      finalnutrition.Protein = ingredients[i][4]
+      finalnutrition.Sodium = ingredients[i][5]
+      finalnutrition.Sugar = ingredients[i][6]
+    }
+    else{
+      finalnutrition.calories = finalnutrition.calories + ingredients[i][1] * 1
+      finalnutrition.carbohydrates = finalnutrition.carbohydrates + ingredients[i][2]
+      finalnutrition.Fat = finalnutrition.Fat + ingredients[i][3]
+      finalnutrition.Protein = finalnutrition.Protein + ingredients[i][4]
+      finalnutrition.Sodium = finalnutrition.Sodium + ingredients[i][5]
+      finalnutrition.Sugar = finalnutrition.Sugar + ingredients[i][6]
+    }
+  }
 }
 
-
-// function createtotalcard(){
-//   const card = document.createElement('div')
-//   card.classList.add("cardarea")
-
-//   const name = document.createElement('h1')
-//   name.classList.add("name")
-//   name.innerHTML = "Total Information";
-
-//   const calories = document.createElement('p')
-//   calories.classList.add("cal")
-//   calories.classList.add("cardtext")
-//   calories.innerHTML = "Calories: " + ingredients[0]
-
-//   const carbohydrates = document.createElement('p')
-//   carbohydrates.classList.add("carb")
-//   carbohydrates.classList.add("cardtext")
-//   carbohydrates.innerHTML = "Carbohydrates: " + ingredients[1]
-
-//   const fat = document.createElement('p')
-//   fat.classList.add("cal")
-//   fat.classList.add("cardtext")
-//   fat.innerHTML = "Fat: " + ingredients[3]
-
-//   const protein = document.createElement('p')
-//   protein.classList.add("cal")
-//   protein.classList.add("cardtext")
-//   protein.innerHTML = "Protein: " + ingredients[4]
-
-//   const sodium = document.createElement('p')
-//   sodium.classList.add("cal")
-//   sodium.classList.add("cardtext")
-//   sodium.innerHTML = "Sodium: " +ingredients[5]
-
-//   const sugar = document.createElement('p')
-//   sugar.classList.add("cal")
-//   sugar.classList.add("cardtext")
-//   sugar.innerHTML = "Sugar: " + ingredients[0] + "g"
-
-
-
-//   const servings = document.createElement('input')
-//   servings.type = "number"
-//   servings.placeholder = ("Change Servring")
-//   servings.classList.add("Updatesearch")
-//   let updateval;
-//   servings.addEventListener("input", e => {
-//     updateval = e.target.value
-//   })
-
-//   const updatebtn = document.createElement('button')
-//   updatebtn.innerHTML = "Update"
-//   updatebtn.classList.add("Updatebtn")
-
-//   updatebtn.addEventListener("click", () => {
-//     if(updateval !== undefined && updateval > 0){
-//       calories.innerHTML = "Calories: " + (Number(ingredients[0]) * updateval) + "cal"
-//       carbohydrates.innerHTML = "Carbohydrates: " + ingredients[1] * updateval + "g" 
-//       fat.innerHTML = "Fat: " + ingredients[3] * updateval + "g"
-//       protein.innerHTML = "Protein: " + ingredients[4] * updateval + "g" 
-//       sodium.innerHTML = "Sodium: " + ingredients[5] * updateval  + "mg"
-//       sugar.innerHTML = "Sugar: " + ingredients[6] * updateval + "g"
-//     }
-//   })
-//   card.append(name, calories, carbohydrates, fat, protein, sodium, sugar, servings, updatebtn)
-//   cardsection.append(card)
-//   main.append(cardsection)
-// }
-
-// createtotalcard()
+sendsearch.addEventListener("input", e => {
+  recname = e.target.value
+  finalnutrition.name = recname
+})

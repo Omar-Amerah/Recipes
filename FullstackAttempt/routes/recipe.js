@@ -7,11 +7,11 @@ const { Recipe } = require("../models/recipe.model.js")
 
 recipeRouter.post("/add", async (req, res) => {
     try{
-        await Recipe.create({name:"Food", calories: 1, carbohydrates: 2, fat: 2, protein: 2, sodium: 2, sugar: 3});
-        res.send("test")
+        const test = await Recipe.create(finalnutrition);
+        res.send(test)
     }
     catch(error){
-        res.send("error")
+        res.send(error)
     }
 })
  
