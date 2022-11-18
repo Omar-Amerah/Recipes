@@ -1,0 +1,176 @@
+body{
+    background-color: rgb(213, 230, 246);
+    display: grid;
+    margin: 0;
+    min-height: 100vh;
+    grid-template-rows: 220px 1fr 150px;
+    text-align: center;
+}
+header{
+    background: linear-gradient(45deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Removebtn
+{
+    display: inline;
+    position:relative;
+    font-size: 30px;
+    top: -400px;
+    left: 35px;
+    color: white;
+    background: transparent;
+    border-width: 0;
+    border-radius: 100px;
+}
+.Updatesearch{
+    border-radius: 10px;
+    opacity: 80%;
+    border-width: 3px;
+    border-style: solid;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.Updatesearch:hover
+{
+    opacity: 70%;
+}
+
+
+.Updatebtn{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 100px;
+    opacity: 80%;
+    font-size: 15px;
+}
+.Updatebtn:hover{
+    background-color: rgb(135, 206, 135);
+}
+
+.Removebtn:hover
+{
+    background: #b01717;
+    transition: 1s;
+}
+
+.Searchcss{
+    padding: 5px;
+    border-radius: 10px;
+    opacity: 80%;
+    border-width: 3px;
+    border-style: solid;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Searchcss:hover{
+    opacity: 70%;
+}
+
+.addbtn{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: aliceblue;
+    border-radius: 10px;
+    opacity: 80%;
+    font-size: 23px;
+    padding: 5px;
+}
+.addbtn:hover{
+    background-color: rgb(135, 206, 135);
+}
+
+footer{
+    background: linear-gradient(-45deg, #4b6cb7 0%, #182848 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: brown;
+    color: white;
+}
+.cardsection {
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+h1{
+    display: block;
+    font-size: 35px;
+}
+.cardtext{
+    display: block;
+    font-size: 25px;
+}
+.cardarea
+{
+    border-style: solid;
+    align-items: center;
+    background: #06266c;
+    color: white;
+    margin: 10px;
+    border-style: groove;
+    border-color: rgb(30, 71, 184);
+    border-radius: 20px;
+    border-width: 5px;
+}
+.cardarea:hover
+{
+    background: #163475;
+    transition: 2s;
+}
+
+@media(min-width: 1025px)
+{
+    .cardsection {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.5rem;
+    }
+}
+@media(min-width: 681px) and (max-width:1024px)
+{
+    .cardsection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+}
+@media(max-width: 680px)
+{
+    .cardsection {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media(min-width: 1400px)
+{
+    .Removebtn{
+        left: 70px;
+    }
+}
+@media(max-width: 1400px)
+{
+    .Removebtn{
+        left: 60px;
+    }
+}
+@media(max-width: 1300px)
+{
+    .Removebtn{
+        left: 50px;
+    }
+}
+@media(max-width: 1200px)
+{
+    .Removebtn{
+        left: 30px;
+    }
+}
+@media(max-width: 1100px)
+{
+    .Removebtn{
+        left: 20px;
+    }
+}
